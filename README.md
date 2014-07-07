@@ -14,5 +14,6 @@
                 RewriteEngine On
                 RewriteCond %{REQUEST_FILENAME} !-f
                 RewriteRule !\.(js|ico|gif|jpg|png|css|htm|html|txt|mp3)$ index.php
+                RewriteRule .? - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
         </Directory>
         </VirtualHost>
