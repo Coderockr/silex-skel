@@ -20,7 +20,7 @@ class User extends Service
     {
         $user = $this->em->getRepository("Skel\Model\User")->find($parameters['id']);
 
-        return array('status' => 'success', 'data' => $user);
+        return array('status' => 'success', 'data' => $user, 'statusCode' => 200);
 
     }
 }
