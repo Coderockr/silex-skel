@@ -1,0 +1,13 @@
+monolog:
+  production: &DEFAULT
+    monolog.name: SKEL
+    monolog.level:  ERROR
+    monolog.logfile:  ./data/log/application.log
+  
+  development:
+    <<: *DEFAULT
+    monolog.level:  DEBUG
+  
+  homolog:
+    <<: *DEFAULT
+    monolog.level:  INFO

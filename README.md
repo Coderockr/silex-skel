@@ -17,3 +17,6 @@
                 RewriteRule .? - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
         </Directory>
         </VirtualHost>
+
+
+https://github.com/marcojanssen/silex-routing-service-provider

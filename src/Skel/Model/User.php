@@ -1,84 +1,86 @@
 <?php
+
 namespace Skel\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\Type;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="User")
  */
-class User extends Entity
+class User
 {
     /**
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @var integer
+     */
+    private $id;
+
+    /**
      * @ORM\Column(type="string", length=150)
-     * @Type("string")
      * @var string
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=150, unique=true)
-     * @Type("string")
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Type("string")
-     * @var string
+     * @return int
      */
-    private $password;
-    
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     * @Type("boolean")
-     * @var boolean
-     */
-    private $admin;
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * @param int $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
-    
+
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName($name)
     {
-        return $this->name = filter_var($name, FILTER_SANITIZE_STRING);
+        $this->name = $name;
+        return $this;
     }
-        
+
+    /**
+     * @return string
+     */
     public function getEmail()
     {
         return $this->email;
     }
-    
+
+    /**
+     * @param string $email
+     * @return $this
+     */
     public function setEmail($email)
     {
-    	if (FALSE === filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    		throw new \InvalidArgumentException('INVALID EMAIL');
-    	}
-        return $this->email = $email;
-    }
-    
-    public function getPassword()
-    {
-        return $this->password;
-    }
-    
-    public function setPassword($password)
-    {
-
-        return $this->password = $password;
-    }
-
-    public function getAdmin()
-    {
-        return $this->admin;
-    }
-    
-    public function setAdmin($admin)
-    {
-        return $this->admin = $admin;
+        $this->email = $email;
+        return $this;
     }
 }
