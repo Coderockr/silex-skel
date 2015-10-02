@@ -12,10 +12,8 @@ use Doctrine\DBAL\Migrations\Configuration\Configuration;
 use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 use Symfony\Component\Console\Application as SymfonyApplication;
 
-$helpers = array('dialog' => new DialogHelper());
-if (isset($app['orm.em'])) {
-    $helpers['em'] = new EntityManagerHelper($app['orm.em']);
-}
+$helpers['em'] = new EntityManagerHelper($app['orm.em']);
+$helpers['dialog'] = new DialogHelper();
 
 $helperSet = new HelperSet($helpers);
 $commands = array(
@@ -30,8 +28,8 @@ $commands = array(
 $application = new SymfonyApplication();
 $config = new Configuration($app['db']);
 $config->setName('Skel Migration');
-$config->setMigrationsDirectory(__DIR__.'/data/migrations');
-$config->setMigrationsNamespace('Skel\\Migration');
+$config->setMigrationsDirectory(__DIR__.'/data/DoctrineMigrations');
+$config->setMigrationsNamespace('Application\Migrations');
 $config->setMigrationsTableName('migration_version');
 
 foreach ($commands as $command) {

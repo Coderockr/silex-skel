@@ -10,17 +10,16 @@ doctrine:
         dbname: you_database
         charset: utf8
     orm:
-      orm.proxies_namespace: "EntityProxy"
-      orm.auto_generate_proxies: "true"
+      orm.auto_generate_proxies: true
       orm.proxies_dir: "/Users/Coderockr/Dev/silex-skel/data/DoctrineORM/Proxy"
+      orm.proxies_namespace: "EntityProxy"
       orm.em.options:
         mappings:
           -
+            use_simple_annotation_reader: false
             type: annotation
-            namespace: "\\Skel\\Entity"
+            namespace: "Skel\\Entity"
             path: "/Users/Coderockr/Dev/silex-skel/src/Skel/Entity"
-            alias: skel
-            use_simple_annotation_reader: "false"
 
   development:
     <<: *DEFAULT
