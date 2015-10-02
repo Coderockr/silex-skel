@@ -1,6 +1,6 @@
 <?php
 
-namespace Skel\Model;
+namespace Skel\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

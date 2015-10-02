@@ -4,15 +4,40 @@ putenv('APPLICATION_ENV=development');
 
 $app = require_once __DIR__.'/bootstrao.php';
 
+use Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper;
 use Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper;
 use Symfony\Component\Console\Application as SymfonyApplication;
-use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Helper\DialogHelper;
+use Doctrine\DBAL\Migrations\Configuration\Configuration;
 
-$application = new SymfonyApplication();
-$helpers['dialog'] = new DialogHelper();
-$helpers['em'] = new EntityManagerHelper($app['orm.em']);
+$helpers = array('dialog' => new DialogHelper());
+if (isset($app['orm.em'])) {
+    $helpers['em'] = new EntityManagerHelper($app['orm.em']);
+}
 
 $helperSet = new HelperSet($helpers);
+$commands = array(
+    new Command\DiffCommand(),
+    new Command\ExecuteCommand(),
+    new Command\GenerateCommand(),
+    new Command\MigrateCommand(),
+    new Command\StatusCommand(),
+    new Command\VersionCommand(),
+);
 
-\Doctrine\ORM\Tools\Console\ConsoleRunner::run($helperSet, $application->all());
+$application = new SymfonyApplication();
+$config = new Configuration($app['db']);
+$config->setName('Fillus Migration');
+$config->setMigrationsDirectory(__DIR__.'/data/migrations');
+$config->setMigrationsNamespace('Fillus\\Migration');
+$config->setMigrationsTableName('migration_version');
+
+foreach ($commands as $command) {
+    /** @var \Doctrine\DBAL\Migrations\Tools\Console\Command\AbstractCommand $command */
+    if ($command instanceof Command\AbstractCommand){
+        $command->setMigrationConfiguration($config);
+    }
+    $application->add($command);
+}
+return  ConsoleRunner::run($helperSet, $application->all());
