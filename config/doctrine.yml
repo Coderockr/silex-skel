@@ -11,7 +11,7 @@ doctrine:
         charset: utf8
     orm:
       orm.auto_generate_proxies: true
-      orm.proxies_dir: "/Users/Coderockr/Dev/silex-skel/data/DoctrineORM/Proxy"
+      orm.proxies_dir: "./data/DoctrineORM/Proxy"
       orm.proxies_namespace: "EntityProxy"
       orm.em.options:
         mappings:
@@ -19,7 +19,7 @@ doctrine:
             use_simple_annotation_reader: false
             type: annotation
             namespace: "Skel\\Entity"
-            path: "/Users/Coderockr/Dev/silex-skel/src/Skel/Entity"
+            path: "./src/Skel/Entity"
 
   development:
     <<: *DEFAULT

@@ -1,4 +1,4 @@
 <?php
 
-$app = require_once __DIR__.'/../bootstrao.php';
+$app = require_once __DIR__.'/../bootstrap.php';
 $app->run();
