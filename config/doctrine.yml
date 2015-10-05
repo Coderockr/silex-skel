@@ -1,0 +1,39 @@
+doctrine:
+  production: &DEFAULT
+    options:
+      db.options: &DBOPTIONS
+        driver: pdo_mysql
+        host: 127.0.0.1
+        port: 3306
+        user: secret_user
+        password: secret_password
+        dbname: you_database
+        charset: utf8
+    orm:
+      orm.auto_generate_proxies: true
+      orm.proxies_dir: "./data/DoctrineORM/Proxy"
+      orm.proxies_namespace: "EntityProxy"
+      orm.em.options:
+        mappings:
+          -
+            use_simple_annotation_reader: false
+            type: annotation
+            namespace: "Skel\\Entity"
+            path: "./src/Skel/Entity"
+
+  development:
+    <<: *DEFAULT
+    options:
+      db.options:
+        <<: *DBOPTIONS
+        driver: pdo_sqlite
+        path: ./data/sqlite.db
+
+  homolog:
+    <<: *DEFAULT
+    options:
+      db.options:
+        <<: *DBOPTIONS
+        user: root
+        password: root
+        dbname: my_database_homolog
