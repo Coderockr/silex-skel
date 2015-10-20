@@ -1,3 +1,5 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/f325962c9f22472bb7fb5270fc404338)](https://www.codacy.com/app/eminetto/silex-skel)
+
 ### Silex Skel
 
 Simples esqueleto para Silex v1.3.4, neste esqueleto temos configuração para `Doctrine 2`, ` Monolog`, `Twig` e `Route`
